@@ -60,6 +60,7 @@ const createSlide = () => {
   content.className = 'slide-content';
   h1.className = 'movie-title';
   p.className = 'movie-des';
+  // imgElement.className = 'slider-ima'
   sliders.push(slide);
   if (sliders.length) {
     sliders[0].style.marginLeft = `calc(-${100 * (sliders.length - 2)}% - ${
@@ -87,5 +88,24 @@ videoCards.forEach((item) => {
   item.addEventListener('mouseleave', () => {
     let video = item.children[1];
     video.pause();
+  });
+});
+
+//card sliders
+
+let cardContainers = [...document.querySelectorAll('.card-container')];
+let preBtns = [...document.querySelectorAll('.pre-btn')];
+let nxtBtns = [...document.querySelectorAll('.nxt-btn')];
+
+cardContainers.forEach((item, i) => {
+  let containerDimensions = item.getBoundingClientRect();
+  let containerWidth = containerDimensions.width;
+
+  nxtBtns[i].addEventListener('click', () => {
+    item.scrollRight += containerWidth - 200;
+  });
+
+  preBtns[i].addEventListener('click', () => {
+    item.scrollLeft += containerWidth + 200;
   });
 });
